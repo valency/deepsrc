@@ -1,4 +1,12 @@
 # 云数科技 JavaScript 代码规范
+最后更新：2017 年 09 年 12 日
+引号：单引号 / `'`
+```
+var html = '<code class="abc">abc</code>';
+```
+```
+span(class='abc', style='color:white;')
+```
 ## 代码架构
 目前我们的前端项目均采用 Node.js / Express / Pug 开发，因此代码结构规范如下：
 ```
@@ -12,6 +20,7 @@
 ├── views
 ├── CHANGELOG.md
 ├── app.js
+├── package.json
 └── Makefile
 ```
 其中：
@@ -22,8 +31,24 @@
 - `static/favicon.ico`：网站图标；
 - `views`：存放 pug 文件；
 - `CHANGELOG.md`：存放更新，详见版本历史文件规范；
-- `app.js`：Node.js 启动文件，详见启动文件规范；
+- `app.js`：Node.js 启动文件，详见 Node.js 配置规范；
+- `package.json`：Node.js 配置文件，详见 Node.js 配置规范；
 - `Makefile`：Make 启动文件，详见启动文件规范。
+
+`static/data`：数据文件，例如 JSON 结构的文件。
+
+img 如果有二级目录，就都要有，例如：
+```
+a.jpg b.jpg
+```
+```
+common/a.jpg
+dashboard/b.jpg
+```
+```
+a.jpg
+dashboard/b.jpg
+```
 
 ##  变量命名
 对于不同的变量类型，命名规则会有不同：
@@ -36,6 +61,8 @@
 文件 / URL 路径 | 小写中划线 | `index-2.pug`
 JavaScript 类 | Pascal Case | `var NewDashboard = function (){};`
 CSS 类 | 小写中划线 | `md-12`
+
+* vue.js 必要时可使用 Camel Case。
 
 ## 注释
 请参照如下范例：
@@ -54,10 +81,20 @@ end_timer = '\u03bcs'; // 'μs'
 - 段落性的注释，如标注下一段代码的功能，必须换行，不得放置于代码后端；
 - 特殊情况（目前仅非 ASCII 字符处理）时，可以注释于代码后端，且代码正文与 `//` 之间需要有一个空格。
 
-## 启动文件
-### Node.js 启动文件
+```
+$(document).ready(function(){});
+  success: function (resp) {
+    javascript:; => javascript:void(0)
+    {},{} 
+    JSON: 'a': 'a' => a: 'a'
+    data.a.b => data['feedback_statistics']['data']
+    css color code: upper case
+```
+
+## Node.js 配置
 Nobody here but us chickens.
-### Make 启动文件 
+
+## 启动文件
 Nobody here but us chickens.
 
 ## 其他
@@ -65,5 +102,6 @@ Nobody here but us chickens.
 ```
 const units = '\u03bcs'; // 'μs'
 ```
+加分号（除非 vue.js 要求）。
 
 **Copyright 2015 - 2017 云数信息科技（深圳）有限公司**
