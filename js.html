@@ -1,0 +1,981 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width initial-scale=1">
+<title>js.md</title>
+<style type="text/css">
+.content {
+  padding: 100.8px 89.6px
+}
+body{
+	padding:20px 50px;
+}
+pre{
+	background: #EEE;
+	padding: 10px;
+}
+</style>
+<style type="text/css">
+.content {
+  position: relative;
+  width: 100%;
+  margin: 0 auto;
+  max-width: 700px; /* 700px is the width of the post in Medium */
+}
+
+/* hide TOC(table of contents). it's height is calculated from the original container */
+.content--buffer .table-of-contents {
+  height: 0;
+}
+
+.content > :first-child,
+.content > :first-child > * /* nested blocks */ {
+  margin-top: 0;
+}
+
+.content > :last-child,
+.content > :last-child > * /* nested blocks */ {
+  margin-bottom: 0;
+}
+
+.mermaid {
+  margin-bottom:  1.8em;
+}
+
+.page-break {
+  page-break-before: always;
+}
+
+@media print {
+  /* fix | code blocks in PDF export are trimmed */
+  .content pre {
+    white-space: pre-wrap;
+  }
+}
+</style>
+<style type="text/css">
+
+
+
+/*
+ * Read-only
+ *
+ * To add a theme:
+ *   1. Add a .css file to the same folder.
+ *   2. Restart the app.
+ *
+ * Taken from https://github.com/sindresorhus/github-markdown-css */
+
+
+
+@font-face {
+  font-family: octicons-link;
+  src: url(data:font/woff;charset=utf-8;base64,d09GRgABAAAAAAZwABAAAAAACFQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEU0lHAAAGaAAAAAgAAAAIAAAAAUdTVUIAAAZcAAAACgAAAAoAAQAAT1MvMgAAAyQAAABJAAAAYFYEU3RjbWFwAAADcAAAAEUAAACAAJThvmN2dCAAAATkAAAABAAAAAQAAAAAZnBnbQAAA7gAAACyAAABCUM+8IhnYXNwAAAGTAAAABAAAAAQABoAI2dseWYAAAFsAAABPAAAAZwcEq9taGVhZAAAAsgAAAA0AAAANgh4a91oaGVhAAADCAAAABoAAAAkCA8DRGhtdHgAAAL8AAAADAAAAAwGAACfbG9jYQAAAsAAAAAIAAAACABiATBtYXhwAAACqAAAABgAAAAgAA8ASm5hbWUAAAToAAABQgAAAlXu73sOcG9zdAAABiwAAAAeAAAAME3QpOBwcmVwAAAEbAAAAHYAAAB/aFGpk3jaTY6xa8JAGMW/O62BDi0tJLYQincXEypYIiGJjSgHniQ6umTsUEyLm5BV6NDBP8Tpts6F0v+k/0an2i+itHDw3v2+9+DBKTzsJNnWJNTgHEy4BgG3EMI9DCEDOGEXzDADU5hBKMIgNPZqoD3SilVaXZCER3/I7AtxEJLtzzuZfI+VVkprxTlXShWKb3TBecG11rwoNlmmn1P2WYcJczl32etSpKnziC7lQyWe1smVPy/Lt7Kc+0vWY/gAgIIEqAN9we0pwKXreiMasxvabDQMM4riO+qxM2ogwDGOZTXxwxDiycQIcoYFBLj5K3EIaSctAq2kTYiw+ymhce7vwM9jSqO8JyVd5RH9gyTt2+J/yUmYlIR0s04n6+7Vm1ozezUeLEaUjhaDSuXHwVRgvLJn1tQ7xiuVv/ocTRF42mNgZGBgYGbwZOBiAAFGJBIMAAizAFoAAABiAGIAznjaY2BkYGAA4in8zwXi+W2+MjCzMIDApSwvXzC97Z4Ig8N/BxYGZgcgl52BCSQKAA3jCV8CAABfAAAAAAQAAEB42mNgZGBg4f3vACQZQABIMjKgAmYAKEgBXgAAeNpjYGY6wTiBgZWBg2kmUxoDA4MPhGZMYzBi1AHygVLYQUCaawqDA4PChxhmh/8ODDEsvAwHgMKMIDnGL0x7gJQCAwMAJd4MFwAAAHjaY2BgYGaA4DAGRgYQkAHyGMF8NgYrIM3JIAGVYYDT+AEjAwuDFpBmA9KMDEwMCh9i/v8H8sH0/4dQc1iAmAkALaUKLgAAAHjaTY9LDsIgEIbtgqHUPpDi3gPoBVyRTmTddOmqTXThEXqrob2gQ1FjwpDvfwCBdmdXC5AVKFu3e5MfNFJ29KTQT48Ob9/lqYwOGZxeUelN2U2R6+cArgtCJpauW7UQBqnFkUsjAY/kOU1cP+DAgvxwn1chZDwUbd6CFimGXwzwF6tPbFIcjEl+vvmM/byA48e6tWrKArm4ZJlCbdsrxksL1AwWn/yBSJKpYbq8AXaaTb8AAHja28jAwOC00ZrBeQNDQOWO//sdBBgYGRiYWYAEELEwMTE4uzo5Zzo5b2BxdnFOcALxNjA6b2ByTswC8jYwg0VlNuoCTWAMqNzMzsoK1rEhNqByEyerg5PMJlYuVueETKcd/89uBpnpvIEVomeHLoMsAAe1Id4AAAAAAAB42oWQT07CQBTGv0JBhagk7HQzKxca2sJCE1hDt4QF+9JOS0nbaaYDCQfwCJ7Au3AHj+LO13FMmm6cl7785vven0kBjHCBhfpYuNa5Ph1c0e2Xu3jEvWG7UdPDLZ4N92nOm+EBXuAbHmIMSRMs+4aUEd4Nd3CHD8NdvOLTsA2GL8M9PODbcL+hD7C1xoaHeLJSEao0FEW14ckxC+TU8TxvsY6X0eLPmRhry2WVioLpkrbp84LLQPGI7c6sOiUzpWIWS5GzlSgUzzLBSikOPFTOXqly7rqx0Z1Q5BAIoZBSFihQYQOOBEdkCOgXTOHA07HAGjGWiIjaPZNW13/+lm6S9FT7rLHFJ6fQbkATOG1j2OFMucKJJsxIVfQORl+9Jyda6Sl1dUYhSCm1dyClfoeDve4qMYdLEbfqHf3O/AdDumsjAAB42mNgYoAAZQYjBmyAGYQZmdhL8zLdDEydARfoAqIAAAABAAMABwAKABMAB///AA8AAQAAAAAAAAAAAAAAAAABAAAAAA==) format('woff');
+}
+
+:root {
+  background: #fff;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  color: #333;
+  font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 16px;
+  line-height: 1.6;
+  word-wrap: break-word;
+}
+
+.content {
+  max-width: 890px;
+}
+
+.katex-display {
+  padding: 0.6rem 0;
+  overflow-x: auto;
+}
+
+a {
+  background-color: transparent;
+  -webkit-text-decoration-skip: objects;
+}
+
+a:active,
+a:hover {
+  outline-width: 0;
+}
+
+strong {
+  font-weight: inherit;
+}
+
+strong {
+  font-weight: bolder;
+}
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+img {
+  border-style: none;
+}
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+code,
+kbd,
+.content > pre {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+hr {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible;
+}
+
+input {
+  font: inherit;
+  margin: 0;
+}
+
+input {
+  overflow: visible;
+}
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+[type="checkbox"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+
+table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+td,
+th {
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+input {
+  font: 13px/1.4 Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+a {
+  color: #4078c0;
+  text-decoration: none;
+}
+
+a:hover,
+a:active {
+  text-decoration: underline;
+}
+
+hr {
+  height: 0;
+  margin: 15px 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #ddd;
+}
+
+hr::before {
+  display: table;
+  content: "";
+}
+
+hr::after {
+  display: table;
+  clear: both;
+  content: "";
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+  margin-bottom: 0;
+  line-height: 1.5;
+}
+
+h1 {
+  font-size: 30px;
+}
+
+h2 {
+  font-size: 21px;
+}
+
+h3 {
+  font-size: 16px;
+}
+
+h4 {
+  font-size: 14px;
+}
+
+h5 {
+  font-size: 12px;
+}
+
+h6 {
+  font-size: 11px;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+blockquote {
+  margin: 0;
+}
+
+ul,
+ol {
+  padding-left: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+ol ol,
+ul ol {
+  list-style-type: lower-roman;
+}
+
+ul ul ol,
+ul ol ol,
+ol ul ol,
+ol ol ol {
+  list-style-type: lower-alpha;
+}
+
+dd {
+  margin-left: 0;
+}
+
+code {
+  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  font-size: 12px;
+}
+
+.content > pre {
+  margin-top: 0;
+  margin-bottom: 0;
+  font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+
+.pl-0 {
+  padding-left: 0 !important;
+}
+
+.pl-1 {
+  padding-left: 3px !important;
+}
+
+.pl-2 {
+  padding-left: 6px !important;
+}
+
+.pl-3 {
+  padding-left: 12px !important;
+}
+
+.pl-4 {
+  padding-left: 24px !important;
+}
+
+.pl-5 {
+  padding-left: 36px !important;
+}
+
+.pl-6 {
+  padding-left: 48px !important;
+}
+
+.form-select::-ms-expand {
+  opacity: 0;
+}
+
+.markdown-body:before {
+  display: table;
+  content: "";
+}
+
+.markdown-body:after {
+  display: table;
+  clear: both;
+  content: "";
+}
+
+.markdown-body>*:first-child {
+  margin-top: 0 !important;
+}
+
+.markdown-body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+a:not([href]) {
+  color: inherit;
+  text-decoration: none;
+}
+
+.anchor {
+  display: inline-block;
+  padding-right: 2px;
+  margin-left: -18px;
+}
+
+.anchor:focus {
+  outline: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 1em;
+  margin-bottom: 16px;
+  font-weight: bold;
+  line-height: 1.4;
+}
+
+h1 .octicon-link,
+h2 .octicon-link,
+h3 .octicon-link,
+h4 .octicon-link,
+h5 .octicon-link,
+h6 .octicon-link {
+  color: #000;
+  vertical-align: middle;
+  visibility: hidden;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+  text-decoration: none;
+}
+
+h1:hover .anchor .octicon-link,
+h2:hover .anchor .octicon-link,
+h3:hover .anchor .octicon-link,
+h4:hover .anchor .octicon-link,
+h5:hover .anchor .octicon-link,
+h6:hover .anchor .octicon-link {
+  visibility: visible;
+}
+
+h1 {
+  padding-bottom: 0.3em;
+  font-size: 2.25em;
+  line-height: 1.2;
+  border-bottom: 1px solid #eee;
+}
+
+h1 .anchor {
+  line-height: 1;
+}
+
+h2 {
+  padding-bottom: 0.3em;
+  font-size: 1.75em;
+  line-height: 1.225;
+  border-bottom: 1px solid #eee;
+}
+
+h2 .anchor {
+  line-height: 1;
+}
+
+h3 {
+  font-size: 1.5em;
+  line-height: 1.43;
+}
+
+h3 .anchor {
+  line-height: 1.2;
+}
+
+h4 {
+  font-size: 1.25em;
+}
+
+h4 .anchor {
+  line-height: 1.2;
+}
+
+h5 {
+  font-size: 1em;
+}
+
+h5 .anchor {
+  line-height: 1.1;
+}
+
+h6 {
+  font-size: 1em;
+  color: #777;
+}
+
+h6 .anchor {
+  line-height: 1.1;
+}
+
+p,
+blockquote,
+ul,
+ol,
+dl,
+table,
+.content > pre {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+hr {
+  height: 4px;
+  padding: 0;
+  margin: 16px 0;
+  background-color: #e7e7e7;
+  border: 0 none;
+}
+
+ul,
+ol {
+  padding-left: 2em;
+}
+
+ul ul,
+ul ol,
+ol ol,
+ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+li>p {
+  margin-top: 16px;
+}
+
+dl {
+  padding: 0;
+}
+
+dl dt {
+  padding: 0;
+  margin-top: 16px;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: bold;
+}
+
+dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+
+blockquote {
+  padding: 0 15px;
+  color: #777;
+  border-left: 4px solid #ddd;
+}
+
+blockquote>:first-child {
+  margin-top: 0;
+}
+
+blockquote>:last-child {
+  margin-bottom: 0;
+}
+
+table {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  word-break: normal;
+  word-break: keep-all;
+}
+
+table th {
+  font-weight: bold;
+}
+
+table th,
+table td {
+  padding: 6px 13px;
+  border: 1px solid #ddd;
+}
+
+table tr {
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+}
+
+table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+img {
+  max-width: 100%;
+  box-sizing: content-box;
+  background-color: #fff;
+}
+
+code {
+  padding: 0;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  margin: 0;
+  font-size: 85%;
+  background-color: rgba(0,0,0,0.04);
+  border-radius: 3px;
+}
+
+code:before,
+code:after {
+  letter-spacing: -0.2em;
+  content: "\00a0";
+}
+
+pre>code {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+
+.highlight {
+  margin-bottom: 16px;
+}
+
+.highlight pre,
+.content > pre {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+}
+
+.highlight pre {
+  margin-bottom: 0;
+  word-break: normal;
+}
+
+.content > pre {
+  word-wrap: normal;
+}
+
+pre code {
+  display: inline;
+  max-width: initial;
+  padding: 0;
+  margin: 0;
+  overflow: initial;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: transparent;
+  border: 0;
+}
+
+pre code:before,
+pre code:after {
+  content: normal;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb;
+}
+
+.pl-c {
+  color: #969896;
+}
+
+.pl-c1,
+.pl-s .pl-v {
+  color: #0086b3;
+}
+
+.pl-e,
+.pl-en {
+  color: #795da3;
+}
+
+.pl-s .pl-s1,
+.pl-smi {
+  color: #333;
+}
+
+.pl-ent {
+  color: #63a35c;
+}
+
+.pl-k {
+  color: #a71d5d;
+}
+
+.pl-pds,
+.pl-s,
+.pl-s .pl-pse .pl-s1,
+.pl-sr,
+.pl-sr .pl-cce,
+.pl-sr .pl-sra,
+.pl-sr .pl-sre {
+  color: #183691;
+}
+
+.pl-v {
+  color: #ed6a43;
+}
+
+.pl-id {
+  color: #b52a1d;
+}
+
+.pl-ii {
+  background-color: #b52a1d;
+  color: #f8f8f8;
+}
+
+.pl-sr .pl-cce {
+  color: #63a35c;
+  font-weight: bold;
+}
+
+.pl-ml {
+  color: #693a17;
+}
+
+.pl-mh,
+.pl-mh .pl-en,
+.pl-ms {
+  color: #1d3e81;
+  font-weight: bold;
+}
+
+.pl-mq {
+  color: #008080;
+}
+
+.pl-mi {
+  color: #333;
+  font-style: italic;
+}
+
+.pl-mb {
+  color: #333;
+  font-weight: bold;
+}
+
+.pl-md {
+  background-color: #ffecec;
+  color: #bd2c00;
+}
+
+.pl-mi1 {
+  background-color: #eaffea;
+  color: #55a532;
+}
+
+.pl-mdr {
+  color: #795da3;
+  font-weight: bold;
+}
+
+.pl-mo {
+  color: #1d3e81;
+}
+
+kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font: 11px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb;
+}
+
+.full-commit .btn-outline:not(:disabled):hover {
+  color: #4078c0;
+  border: 1px solid #4078c0;
+}
+
+:checked+.radio-label {
+  position: relative;
+  z-index: 1;
+  border-color: #4078c0;
+}
+
+.octicon {
+  display: inline-block;
+  vertical-align: text-top;
+  fill: currentColor;
+}
+
+.task-list-item {
+  list-style-type: none;
+}
+
+.task-list-item+.task-list-item {
+  margin-top: 3px;
+}
+
+.task-list-item input {
+  margin: 0 0.2em 0.25em -1.6em;
+  vertical-align: middle;
+}
+
+hr {
+  border-bottom-color: #eee;
+}
+
+/* Code
+   ---------------- */
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #aaa;
+}
+
+.token.operator,
+.token.punctuation {
+  color: #888;
+}
+
+.token.selector,
+.token.attr-name,
+.token.entity,
+.token.url {
+  color: #987;
+}
+
+.token.tag,
+.token.constant,
+.token.keyword {
+  color: #a7a;
+}
+
+.token.function,
+.token.attr-value {
+  color: #68a;
+}
+
+.token.number,
+.token.boolean,
+.token.regex,
+.token.string {
+  color: #6a8;
+}
+
+.token.variable,
+.token.property,
+.token.key {
+  color: #a66;
+}
+
+</style>
+</head>
+<body>
+<h1 id="javascript">云数科技 JavaScript 代码规范</h1>
+<p>最后更新：2017 年 09 年 18 日</p>
+<h2 id="">代码架构</h2>
+<p>目前我们的前端项目均采用 Node.js / Express / Pug 开发，因此代码结构规范如下：</p>
+<pre><code>├── node_modules
+├── static
+│&nbsp;&nbsp; ├── lib
+│&nbsp;&nbsp; ├── css
+│&nbsp;&nbsp; ├── img
+│&nbsp;&nbsp; ├── js
+│&nbsp;&nbsp; ├── data
+│&nbsp;&nbsp; └── favicon.ico
+├── views
+├── app.js
+├── package.json
+├── Makefile
+└── CHANGELOG.md
+</code></pre>
+<p>其中：</p>
+<ul>
+<li><code>node_modules</code>：存放 Node.js 的组件库，不得放入 git repo 中；</li>
+<li><code>static/lib</code>：存放 JavaScript 组件库，每个组件根目录需要命名为 <code>&lt;name&gt;-&lt;version&gt;</code> 格式，例如：<code>jquery-1.10</code>；</li>
+<li><code>static/css</code>、<code>static/js</code>：分别对应 <code>views/*.pug</code> 的 CSS 和 JavaScript 组件，例如：<code>views/index.pug</code>、<code>css/index.css</code> 及 <code>js/index.js</code>，每个 pug 至多拥有一个对应 CSS 及 JavaScript 组件；</li>
+<li><code>static/img</code>：存放静态图片，可以有二级目录；</li>
+<li><code>static/data</code>：静态数据文件，例如 JSON 文件；</li>
+<li><code>static/favicon.ico</code>：网站图标；</li>
+<li><code>views</code>：存放 pug 文件；</li>
+<li><code>app.js</code>：Node.js 启动文件，详见 Node.js 配置规范；</li>
+<li><code>package.json</code>：Node.js 配置文件，详见 Node.js 配置规范；</li>
+<li><code>Makefile</code>：Make 启动文件，详见启动文件规范；</li>
+<li><code>CHANGELOG.md</code>：存放更新，详见版本历史规范。</li>
+</ul>
+<h2 id="-2">变量命名</h2>
+<p>对于不同的变量类型，命名规则会有不同：</p>
+<table>
+<thead>
+<tr>
+<th>变量类型</th>
+<th>命名规则</th>
+<th>示范</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>全局变量</td>
+<td>全部大写</td>
+<td><code>var GLOBAL_VAR = '';</code></td>
+</tr>
+<tr>
+<td>普通变量</td>
+<td>小写下划线</td>
+<td><code>var local_variable = '';</code></td>
+</tr>
+<tr>
+<td>重载函数</td>
+<td>Camel Case</td>
+<td><code>String.prototype.djangoFields = function(){};</code></td>
+</tr>
+<tr>
+<td>普通函数</td>
+<td>小写下划线</td>
+<td><code>function show_dialog(){}</code></td>
+</tr>
+<tr>
+<td>文件 / URL 路径</td>
+<td>小写中划线</td>
+<td><code>index-2.pug</code></td>
+</tr>
+<tr>
+<td>JavaScript 类</td>
+<td>Pascal Case</td>
+<td><code>var NewDashboard = function (){};</code></td>
+</tr>
+<tr>
+<td>CSS 类</td>
+<td>小写中划线</td>
+<td><code>md-12</code></td>
+</tr>
+</tbody>
+</table>
+<p>注意，在 Vue.js 环境下，请以 Vue.js 代码规范为准。</p>
+<h2 id="-3">注释</h2>
+<p>请参照如下范例：</p>
+<pre><code>// 处理时间
+var start_timer = moment().startOf('month').format('YYYY-MM-DD');
+// Process end timer
+var end_timer = moment().format('YYYY-MM-DD');
+// TODO: Modify end timer 处理 timer 时间
+end_timer = '\u03bcs'; // 'μs'
+</code></pre>
+<p>如上范例，注释需要注意以下几点：</p>
+<ul>
+<li>注释正文与 <code>//</code> 之间需要有一个空格；</li>
+<li>注释正文需要采用 sentence case，中文与英文之间需要有空格；</li>
+<li>TODO 需要使用英文冒号，冒号后的正文采用 sentence case；</li>
+<li>段落性的注释，如标注下一段代码的功能，必须换行，不得放置于代码后端；</li>
+<li>特殊情况时，可以注释于代码后端，且代码正文与 <code>//</code> 之间需要有一个空格。</li>
+</ul>
+<h2 id="nodejs">Node.js 配置</h2>
+<p>Nobody here but us chickens.</p>
+<h2 id="-4">启动文件</h2>
+<p>Nobody here but us chickens.</p>
+<h2 id="-5">版本历史</h2>
+<p>版本历史应存放在 <code>CHANGELOG.md</code> 中，例如：</p>
+<pre><code>## v1.9.14
+- **【新增】** 某条 API @xli
+- **【更新】** 某些输入参数 @hzhang
+- **【修正】** 某个 bug @zzqian
+- **【删除】** 某条 API @zyyang
+</code></pre>
+<p>其中：</p>
+<ul>
+<li>版本号使用 <code>v&lt;milestone&gt;.&lt;month&gt;.&lt;date&gt;</code> 格式，例如：<code>v1.9.14</code>；</li>
+<li>说明前缀有四种情况：新增、修改、修正、删除，请根据实际情况选择；</li>
+<li>详细说明请使用 sentence case，中文与英文之间需要有空格；</li>
+<li>说明后缀 <code>@&lt;username&gt;</code> 代表提交人员，请使用自己的公司用户名，后缀与详细说明之间有一个空格。</li>
+</ul>
+<h2 id="-6">其他</h2>
+<ul>
+<li>Push 到 Git repo 中时，请使用版本号或 merge 信息作为 commit 注释，如有其它内容请务必换行并以 <code>-</code> 作为开头。例如：</li>
+</ul>
+<pre><code>v0.1.1
+- Code review passed
+</code></pre>
+<pre><code>Merge branch 'zyyang' of git.deepera.com:deepera/drquant
+</code></pre>
+<ul>
+<li>非 ASCII 且非主要语言字符请使用转义及注释，不要仅注释或直接写入字符串中，如：</li>
+</ul>
+<pre><code>const units = '\u03bcs'; // 'μs'
+</code></pre>
+<ul>
+<li>本语言请使用单引号 <code>'</code> 赋值，而包含的 HTML 代码使用双引号 <code>"</code>，如：</li>
+</ul>
+<pre><code>var html = '&lt;div class="col-md-12"&gt;&lt;/div&gt;';
+</code></pre>
+<ul>
+<li>除非特殊要求（如 Vue.js），代码结尾需要添加分号 <code>;</code>。</li>
+</ul>
+<pre><code>$(document).ready(function(){});
+  success: function (resp) {
+    javascript:; =&gt; javascript:void(0)
+    {},{} 
+    JSON: 'a': 'a' =&gt; a: 'a'
+    data.a.b =&gt; data['feedback_statistics']['data']
+    css color code: upper case
+</code></pre>
+<pre><code>var html = '&lt;code class="abc"&gt;abc&lt;/code&gt;';
+</code></pre>
+<pre><code>span(class='abc', style='color:white;')
+</code></pre>
+<p><strong>Copyright 2015 - 2017 云数信息科技（深圳）有限公司</strong></p>
+
+</body>
+</html>
