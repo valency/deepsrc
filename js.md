@@ -1,5 +1,5 @@
 # 云数科技 JavaScript 代码规范
-最后更新：2017 年 09 年 14 日
+最后更新：2017 年 09 年 18 日
 
 ## 代码架构
 目前我们的前端项目均采用 Node.js / Express / Pug 开发，因此代码结构规范如下：
@@ -74,7 +74,7 @@ Nobody here but us chickens.
 ```
 ## v1.9.14
 - **【新增】** 某条 API @xli
-- **【修改】** 某些输入参数 @hzhang
+- **【更新】** 某些输入参数 @hzhang
 - **【修正】** 某个 bug @zzqian
 - **【删除】** 某条 API @zyyang
 ```
@@ -83,7 +83,16 @@ Nobody here but us chickens.
 - 说明前缀有四种情况：新增、修改、修正、删除，请根据实际情况选择；
 - 详细说明请使用 sentence case，中文与英文之间需要有空格；
 - 说明后缀 `@<username>` 代表提交人员，请使用自己的公司用户名，后缀与详细说明之间有一个空格。
+
 ## 其他
+- Push 到 Git repo 中时，请使用版本号或 merge 信息作为 commit 注释，如有其它内容请务必换行并以 `-` 作为开头。例如：
+```
+v0.1.1
+- Code review passed
+```
+```
+Merge branch 'zyyang' of git.deepera.com:deepera/drquant
+```
 - 非 ASCII 且非主要语言字符请使用转义及注释，不要仅注释或直接写入字符串中，如：
 ```
 const units = '\u03bcs'; // 'μs'
